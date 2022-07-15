@@ -4,16 +4,15 @@ function App() {
   const [weatherNow, setWeatherNow] = useState({});
   const [locations, setLocations] = useState("london");
   const [photos, setPhotos] = useState([]);
-
-  const url = `http://api.openweathermap.org/data/2.5/weather?q=${locations}&APPID=fdae4887bde283a8e861b2ab69d162c9&units=metric`;
-
-  const url2 =`https://api.unsplash.com/search/photos?query=${locations}&client_id=qJn9HeRKpSm6UvWuWKc0ZMMWZGyyg6A2D2tEJ6xKxPs`
-
   const fetchWeather = async () => {
+    const url = `http://api.openweathermap.org/data/2.5/weather?q=${locations}&APPID=fdae4887bde283a8e861b2ab69d162c9&units=metric`;
+
+    const url2 = `https://api.unsplash.com/search/photos?query=${locations}&client_id=qJn9HeRKpSm6UvWuWKc0ZMMWZGyyg6A2D2tEJ6xKxPs`;
+
     try {
       const response = await fetch(url);
       const resWeather = await response.json();
-      console.log(resWeather.weather[0].description);
+      // console.log(resWeather.weather[0].description);
       setWeatherNow(resWeather);
     } catch (error) {
       console.log(error);
@@ -29,8 +28,8 @@ function App() {
 
   useEffect(() => {
     fetchWeather();
-  },[setLocations]);
-  
+  },[]);
+
   return (
     <div className="app">
       <div className="wrapper">
@@ -42,12 +41,13 @@ function App() {
             placeholder="Enter location"
             className="location_input"
           />
-          <button className="location_searcher" onClick={fetchWeather}>
-            Search Location
-          </button>
+          <button type="button" className="location_searcher" onClick={fetchWeather}>Search Location</button>
         </div>
         <div className="app__data">
-          <p className="temp">Current Temperature: {weatherNow?.main?.temp}<span>°C</span></p>
+          <p className="temp">
+            Current Temperature: {weatherNow?.main?.temp}
+            <span>°C</span>
+          </p>
           {/* <p className="temp"> Current weather : {weatherNow?.description}</p> */}
         </div>
         <img className="app__image" src={photos} alt="" />
