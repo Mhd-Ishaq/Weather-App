@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 
 function App() {
-  const [weatherNow, setWeatherNow] = useState({});
+  const [weatherNow, setWeatherNow] = useState([]);
   const [locations, setLocations] = useState("london");
   const [photos, setPhotos] = useState([]);
   const fetchWeather = async () => {
-    const url = `http://api.openweathermap.org/data/2.5/weather?q=${locations}&APPID=fdae4887bde283a8e861b2ab69d162c9&units=metric`;
+    const url = `http://api.openweathermap.org/data/2.5/weather?q=${locations}&APPID=ce02a8091e826d523a788adfb291b3d7&units=metric`;
 
     const url2 = `https://api.unsplash.com/search/photos?query=${locations}&client_id=qJn9HeRKpSm6UvWuWKc0ZMMWZGyyg6A2D2tEJ6xKxPs`;
 
@@ -28,6 +28,7 @@ function App() {
 
   useEffect(() => {
     fetchWeather();
+    // eslint-disable-next-line
   },[]);
 
   return (
